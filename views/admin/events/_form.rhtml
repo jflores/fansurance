@@ -1,0 +1,37 @@
+<!--[form:event]-->
+<label>Select Your Sport</label><br />
+<select id="sport_id" name="sport_id"   onChange="<%= remote_function(:url => {:controller => '/admin/site', :action => 'get_team_list'},:with => "'sport_id='+value")-%>">
+
+         <%= options_from_collection_for_select(
+         Sport.find(:all), "id", "name", @event.sport_id)
+         %>
+       </select><br />
+      <% sports = Sport.find(:all) %>
+
+      <%  
+        sport = @event.sport_id ? @event.sport : sports[0] 
+        conference = @event.conference ? @event.conference : nil
+        team = @event.team ? @event.team : nil
+
+      %>
+        <div id="conference_list"><%=  if  sport.conferences.size > 0 then render :partial => 'conference_list', :locals => {:sport => sport, :conferences => sport.conferences, :conference => conference} end %></div>
+        <div id="team_list"><%= render :partial => 'team_list', :locals => {:sport => sport, :teams => Team.find(:all, :conditions => ['sport_id = ?', sport.id]), :any_team => true, :team => team } %></div>
+      <br/>
+
+<p><label for="event_name">Name</label><br/>
+<%= text_field 'event', 'name'  %></p>
+
+
+<p><label for="event_num_policies">Outstanding Policies</label><br/>
+<%= text_field 'event', 'num_policies'  %></p>
+
+<p><label for="event_policy_price">Policy price</label><br/>
+$<%= text_field 'event', 'policy_price'  %></p>
+
+<p><label for="event_max_user_policies">Maximum Policies user can hold</label><br/>
+<%= text_field 'event', 'max_user_policies'  %></p>
+
+<p><label for="event_policy_details">Policy Details</label><br/>
+<%= text_area 'event', 'policy_details'  %></p>
+<!--[eoform:event]-->
+

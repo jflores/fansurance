@@ -1,0 +1,25 @@
+<h1>Listing conferences</h1>
+
+<table>
+  <tr>
+    <th>Sport</th>
+    <th>Conference</th>
+  </tr>
+  
+<% for conference in @conferences %>
+  <tr>
+    <td><%=h conference.sport.name %></td>
+    <td><%=h conference.name %></td>
+    <td><%= link_to 'Show', :action => 'show', :id => conference %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => conference %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => conference }, :confirm => 'Are you sure?', :post => true %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @conference_pages.current.previous } if @conference_pages.current.previous %>
+<%= link_to 'Next page', { :page => @conference_pages.current.next } if @conference_pages.current.next %> 
+
+<br />
+
+<%= link_to 'New conference', :action => 'new' %>

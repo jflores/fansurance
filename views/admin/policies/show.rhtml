@@ -1,0 +1,8 @@
+<% for column in Policy.content_columns %>
+<p>
+  <b><%= column.human_name %>:</b> <%=h @policy.send(column.name) %>
+</p>
+<% end %>
+
+<%= link_to 'Edit', :action => 'edit', :id => @policy %> |
+<%= link_to 'Back', :action => 'list' %>

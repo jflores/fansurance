@@ -1,0 +1,26 @@
+	<div class="body signup"><!-- BEGIN class body-->
+        <div class="teambody"><!--Start section teambody -->
+            <div class="teamhead"><!--Start section teamhead -->
+                <h2 class="title">Edit your details</h2>
+
+                    <p class="error">
+					<%= error_messages_for :user %>                    
+					</p>
+                    <div class="formwrap"><!--Start section formwrap -->
+<%= start_form_tag :action => 'update' %>
+  <%= render :partial => 'form' %>
+  <br />
+  <%= render :partial => 'shipping_form' %>
+  <%= submit_tag 'Edit' %>
+<%= end_form_tag %>
+    <!--                    <input class="submit" type="submit" value="finish"> -->
+
+                    </div><!--End section formwrap-->
+                
+                <div class="clear"><!--Start section clear -->                
+                </div><!--End section clear-->
+            </div><!--End section teamhead -->            
+        </div><!--End section teambody-->
+		<div class="clear"><!-- BEGIN class clear-->			
+		</div><!-- END class clear-->
+	</div><!-- END class body-->

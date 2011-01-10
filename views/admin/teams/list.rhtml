@@ -1,0 +1,30 @@
+<h1>Listing teams</h1>
+
+<table>
+  <tr>
+    <td>Sport</td>
+    <td>Conference</td>
+    <td>Name</td>
+  </tr>
+  
+<% for team in @teams %>
+  <tr>
+    <td><%= team.sport.name %></td>
+    <td><%= team.conference_name %></td>
+    <td><%= team.name %></td>
+    <td><%= link_to 'Show', :action => 'show', :id => team %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => team %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => team }, :confirm => 'Are you sure?', :post => true %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @team_pages.current.previous } if @team_pages.current.previous %>
+<%= link_to 'Next page', { :page => @team_pages.current.next } if @team_pages.current.next %> 
+
+<br />
+<br />
+
+<%= link_to 'New team', :action => 'new' %>&nbsp;|
+<%= link_to 'Edit  Team Blurbs(CSV upload)', :action => 'edit_team_blurbs' %> &nbsp;|
+<%= link_to 'Download Team Blurbs as CSV', :action => 'download_team_blurbs' %> 

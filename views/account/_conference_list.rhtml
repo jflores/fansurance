@@ -1,0 +1,13 @@
+<label for="conference">Select Conference:</label>
+<select id="conference_id" name="conference_id" onChange="<%= remote_function(
+                                                                                      :url => {:controller => 'account', :action => 'get_team_list'},
+                                                                                      :with => "'conference_id='+value+'&'+'sport_id='+#{sport.id}")-%> 
+                                                                                      ">
+  <% conferences.each do |c| %>
+  <% if conference == c %>
+  <option value="<%=c.id %>" selected><%= c.name%></option>
+  <% else %>
+  <option value="<%=c.id %>"><%= c.name%></option>
+  <% end %>
+  <% end %>
+ </select><br />

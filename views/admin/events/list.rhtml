@@ -1,0 +1,43 @@
+<h1>Listing events</h1>
+
+<table>
+  <tr>
+    <th>Event Name</th>
+    <th>Sport</th>
+    <th>Conference</th>
+    <th>Team</th>
+    <th>OutStanding Policies</th>
+    <th>Policy Price</th>
+    <th>Max Policies User Can hold</th>
+  </tr>
+  
+<% for event in @events %>
+  <tr>
+    <td><%=event.name %></td>
+    <td><%=event.team.sport.name %></td>
+    <td><%=event.team.conference_name %></td>
+    <td><%=event.team.name %></td>
+    <td><%=event.num_policies %></td>
+    <td>$<%=event.policy_price %></td>
+    <td><%=event.max_user_policies %></td>
+    <td><%= link_to 'Show', :action => 'show', :id => event %></td>
+    <td><%= link_to 'Show Owners', :action => 'show_owners', :id => event %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => event %></td>
+    <% if event.is_active %>
+    <td><%= link_to 'Deactivate', :action => 'deactivate', :id => event %></td>
+    <% else %>
+    <td><%= link_to 'Activate', :action => 'activate', :id => event %></td>
+    <% end %>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => event }, :confirm => 'Are you sure?', :post => true %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @event_pages.current.previous } if @event_pages.current.previous %>
+<%= link_to 'Next page', { :page => @event_pages.current.next } if @event_pages.current.next %> 
+
+<br />
+
+<%= link_to 'New event', :action => 'new' %> &nbsp;|
+<%= link_to 'Create Events(CSV upload)', :action => 'csv_import' %>&nbsp;|
+<%= link_to 'Download CSV', :action => 'csv_download' %>&nbsp;|

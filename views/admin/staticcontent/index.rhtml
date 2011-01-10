@@ -1,0 +1,12 @@
+<form action="/admin/staticcontent/index" method="post" name="staticcontent" >
+  <select id="page_name" name="static_content_id" onChange="<%= remote_function(:url  => {:controller => 'staticcontent', :action => 'get_content'},:loading => "$('static_content').value = '....loading content....'", :with => "'static_content_id='+value") %>">
+    <% @all_content.each do |c| %>
+    <option value="<%= c.id %>" <% if c.id == @static_content.id %>selected="selected"<% end %>><%= c.page_name.titleize %></option>
+    <% end %>
+  </select>
+  <br />
+  <br />
+    <textarea name="content" rows="10" cols="50" id="static_content"><%= @static_content.content%></textarea>
+  <br />
+    <input type="submit" name="Submit" value='Submit' />
+</form>

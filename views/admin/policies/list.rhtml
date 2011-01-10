@@ -1,0 +1,27 @@
+<h1>Listing policies</h1>
+
+<table>
+  <tr>
+    <th>Team</th>
+    <th>Price</th>
+  </tr>
+  
+<% for policy in @policies %>
+  <tr>
+    <td><%=policy.event.name %></td>
+    <td><%=policy.price %></td>
+    <% if not policy.is_sold %>
+    <td><%= link_to 'Show', :action => 'show', :id => policy %></td>
+    <td><%= link_to 'Edit', :action => 'edit', :id => policy %></td>
+    <td><%= link_to 'Destroy', { :action => 'destroy', :id => policy }, :confirm => 'Are you sure?', :post => true %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Previous page', { :page => @policy_pages.current.previous } if @policy_pages.current.previous %>
+<%= link_to 'Next page', { :page => @policy_pages.current.next } if @policy_pages.current.next %> 
+
+<br />
+
+<%= link_to 'New policy', :action => 'new' %>

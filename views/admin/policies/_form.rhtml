@@ -1,0 +1,10 @@
+<%= error_messages_for 'policy' %>
+
+<!--[form:policy]-->
+<p><label for="policy_event">Event</label><br />
+<%= select("policy", "event_id", Event.find(:all).collect {|e| [ e.name, e.id ] }, { :include_blank => true }) %><br />
+
+<p><label for="policy_policy_price">Policy price</label><br/>
+<%= text_field 'policy', 'price'  %></p>
+<!--[eoform:policy]-->
+

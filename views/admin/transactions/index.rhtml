@@ -1,0 +1,46 @@
+<h4>Choose Transactions By Date</h4>
+<form action="/admin/transactions" method="POST">
+<input type="text" name="start_time" style="display:none" id="start_time" value="">
+<a id="_start_time_link" href="#" onclick="DatePicker.toggleDatePicker('start_time')"
+    class="demo_link">[ Choose Start Date ]</a>
+  <div   id="_start_time_calendar" class="date_picker" style="display:none"></div>
+
+<input type="text" name="end_time" style="display:none" id="end_time" value="">
+<a id="_end_time_link" href="#" onclick="DatePicker.toggleDatePicker('end_time')"
+    class="demo_link">[ Choose End Date ]</a>
+  <div   id="_end_time_calendar" class="date_picker" style="display:none"></div>
+  <input type="submit" value="Submit" name="submit">
+</form>
+<hr>
+<h4><a href="/admin/transactions/index?num_days=7">Last 7 days transactions</a></h4>
+<hr>
+<h4><a href="/admin/transactions/index?num_days=30">Last 30 days transactions</a></h4>
+<hr>
+<h4><a href="/admin/transactions/index?num_days=90">Last 90 days transactions</a></h4>
+<hr>
+<% if not flash[:error] %>
+<table>
+  <thead>
+  <tr>
+    <th>Event</th>
+	<th>Team name</th>
+	<th>Sport name</th>
+    <th>Quantity</th>
+    <th>Policy price</th>
+    <th>From Fansurance</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @transactions.each do |t| %>
+    <tr>
+      <td><%= t.event_name %></td>
+	  <td><%= h(t.team_name) %></td>
+	  <td><%= h(t.sport_name) %></td>
+      <td><%= t.quantity %></td>
+      <td><%= t.policy_price %></td>
+      <td><%= t.from_fansurance ? "From Fansurance" : "From Policy Exchange" %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+<% end %>

@@ -1,0 +1,11 @@
+<label for="team">Select a Team</label>
+  <select id="team_id" name="team_id" >
+    <% teams.each do |t| %>
+      <% if team == t %>
+      <option value="<%= t.id %>" selected><%= t.name %></option>
+      <% else %>
+      <option value="<%= t.id %>"><%= t.name %></option>
+      <% end %>
+    <% end %>
+  </select>
+</span>

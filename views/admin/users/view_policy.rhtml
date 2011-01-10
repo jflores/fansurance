@@ -1,0 +1,14 @@
+<h4>Policy Details</h4>
+<b>Team:</b> <%= @event.team.name %><br />
+<b>Event:</b> <%= @event.name %><br />
+<b>No of policies:</b> <%= @order_item.quantity %>(Origianl Purchase Quantity)<br />
+<b>Purchased On:</b> <%= @order_item.order.created_at.strftime("%m/%d/%Y") %><br />
+<b>Total Paid:</b> <%= @order_item.policy_price *  @order_item.quantity %><br />
+<b>Ship To: </b> <%= @order_item.order.shipping_name %><br />
+<%=  @order_item.order.s_address1 %><br />
+<%=  @order_item.order.s_address2 %><br />
+<%=  @order_item.order.s_city %>,<%=  @order_item.order.s_state %>,<%=  @order_item.order.s_zip %><br >
+
+<center><h4>Policy</h4></center>
+<p><%= @event.policy_details %></p>
+

@@ -1,0 +1,52 @@
+<div class="body signup"><!-- BEGIN class body-->
+        <div class="teambody"><!--Start section teambody -->
+            <div class="teamhead"><!--Start section teamhead -->
+                <h2 class="title">Account Creation</h2>
+                <form action="/account/signup" method="post" accept-charset="utf-8" name="signup">
+                  <% if @errors %>
+                    <p class="error">
+                        The following problems prevented us from creating your account:
+                    </p>
+                    <ul class="error">
+                        <li><%= error_messages_for :user %></li>
+                    </ul>
+                    <% end %>
+                    
+                    <label for="ac_name">What is your first name?</label>
+                    <%= text_field :user, :firstname %>
+                    <label for="ac_name">What is your last name?</label>
+                    <%= text_field :user, :lastname %>
+                    <label for="ac_email">And your email address?</label>
+                    <span class="desc">Your email address will only be used to communicate with you about your purchase. We will never share, sell, or otherwise use it without your expressed permission.</span>
+                    <%= text_field :user, :email %>
+                    <label for="ac_email_2">Enter your email address again.</label>
+                    <%= text_field :user, :email_confirmation %>
+                    <label for="ac_password">Pick a password.</label>
+                    <%= password_field :user, :password %>
+                    <label for="ac_password_2">Type your password again.</label>
+                    <%= password_field :user, :password_confirmation %>
+                    <div class="checkbox" id="checkbox1"><!--Start section checkbox -->
+                        <%= check_box :user, :privacy_agreement %>                  
+                        <label for="ac_tos">Yes. I agree to the <a href="/site/legal" target="_blank">terms of use</a> and <a href="/site/legal" target="_blank">privacy policy</a>.</label>                        
+                    </div><!--End section checkbox-->
+                    <div class="checkbox" id="checkbox2"><!--Start section checkbox -->
+
+                        <%= check_box :user, :email_agreement %>                   
+                        <label for="ac_ad">Yes. Fansurance.com can email me about new product and service offerings.</label>                        
+                    </div><!--End section checkbox-->
+                    <a href="#" onClick="doSubmit();" class="submit">Finish</a>
+                </form>
+                <div class="clear"><!--Start section clear -->                
+                </div><!--End section clear-->
+            </div><!--End section teamhead -->            
+        </div><!--End section teambody-->
+		<div class="clear"><!-- BEGIN class clear-->			
+		</div><!-- END class clear-->
+  </div><!-- END class body-->
+  <script type="text/javascript">
+    function doSubmit()
+    {
+      document.signup.submit();
+      return true
+    }
+  </script>

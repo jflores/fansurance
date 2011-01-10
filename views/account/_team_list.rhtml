@@ -1,0 +1,9 @@
+  <label for="team_id">Select a Team:</label>
+  <select id="team_id" name="team_id" onChange="<%= remote_function(:update => "begin", 
+                                                                              :url => {:controller => 'account', :action => 'get_begin_button'},
+                                                                              :with => "'team_id='+value+'&'+'sport_id='+#{sport.id}") -%> ">
+    <% teams.each do |t| %>
+      <option value="<%= t.id %>"><%= t.name %></option>
+    <% end %>
+    <option value="-1">Any Team</option>
+  </select>

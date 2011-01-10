@@ -1,0 +1,26 @@
+<%= error_messages_for 'team' %>
+
+<!--[form:team]-->
+<p><label for="team_name">Name</label><br/>
+<%= text_field 'team', 'name'  %></p>
+
+<p><label for="team_details">Details</label><br/>
+<%= text_area 'team', 'details' , :rows => 7, :cols => 40 %></p>
+
+<label>Select Your Sport</label><br />
+<select id="sport_id" name="sport_id">
+  <option value="">Select</option>
+   <%= options_from_collection_for_select(
+   Sport.find(:all), "id", "name", @team.sport_id )
+   %>
+ </select><br />
+ <div id="conference_list">Conference:<%= @team.conference_name%></div>
+<br/>
+<%= observe_field("sport_id",
+  :update => "conference_list",
+  :url => {:controller => '/admin/teams', :action => 'get_conference_list'},
+  :with => "'sport_id='+value")
+  %>
+
+<!--[eoform:team]-->
+

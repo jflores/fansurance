@@ -1,0 +1,102 @@
+<div class="body policy account"><!-- BEGIN class body-->
+        <div class="teambody"><!--Start section teambody -->
+            <div class="teamhead"><!--Start section teamhead -->
+                <p class="shop"><a href="/site/help">help</a></p>
+                <div class="clear"><!--Start section clear -->                    
+                </div><!--End section clear-->
+                <h2 class="title">my account</h2>                
+                    <p class="info">You can review your policies and update your contact information.</p>                    
+                <div class="left"><!--Start section left -->
+                    <h3>my contact information</h3>
+                    <address>
+                        <span class="name"><%= "#{current_user.firstname} #{current_user.lastname}"-%></span>
+                        <span class="address-1"><%=  @user.shipping_address1 %></span>
+                        <span class="address-2"><%=  @user.shipping_address2 %></span>
+                        <span class="state"><%=  "#{@user.shipping_city}, #{@user.shipping_state},  #{@user.shipping_zip}" %></span>
+                        <!--<span class="tel">(804) 683-9531</span>-->
+                    </address>
+                    <ul>
+                        <li><%=  @user.email -%></li>
+                        <li><% if  @user.email_agreement -%>I want to receive email updates<% else -%> You are not subscribed to fansurance email  <% end -%></li>
+                    </ul>
+                    <a href="#" class="modify"><%= link_to '[Update]', :action => :edit -%></a>                    
+                </div><!--End section left-->
+                
+                <div class="right"><!--Start section right -->
+                    <div class="righttop"><!--Start section righttop -->
+                        <div class="rightbottom"><!--Start section rightbottom -->
+                            <h3>need a policy?</h3>
+                            <form action="#" method="post">
+                                <div class="form_item"><!--Start section form_item -->
+                                    <label for="sport_id">Select sport:</label>
+                                        <select id="sport_id" name="sport_id" onChange="<%= remote_function(:url => {:controller => 'account', :action => 'get_team_list'}, :with => "'sport_id='+value")-%>">
+                                          <%= options_from_collection_for_select(Sport.find(:all), "id", "name") -%>   
+                                          </select>
+                                  </div><!--End section form_item-->
+                                <div class="form_item" id="conference_list"><!--Start section form_item -->
+                                  <%= sport = Sport.find(:first, :include => :conferences); if sport.conferences.size > 0 then render :partial => 'conference_list', :locals => {:sport => sport,:conferences => sport.conferences,:conference => nil} end %>                                              
+                                </div><!--End section form_item-->
+                                <div class="form_item" id="team_list"><!--Start section form_item -->
+                                        <%= render :partial => 'team_list', :locals => {:sport => sport, :teams => Team.find(:all, :conditions => ['sport_id = ?', sport.id]) } %>                                                   
+                                </div><!--End section form_item-->                        
+                                <div id="begin" style="display: inline;"><%= render :partial => "begin_button", :locals => {:sport => sport, :team => Team.find(:first, :conditions => ['sport_id = ?', sport.id]), :any_team => nil,:exchange => false } -%></div>    
+                                <!--<input type="submit" class="submit" value="Search">-->
+                                </form>
+                        </div><!--End section rightbottom-->
+                    </div><!--End section righttop-->
+                </div><!--End section right-->
+                <div class="clear"><!--Start section clear -->                    
+                </div><!--End section clear-->
+                <ul class="tabs">
+                    <li class="alternate" onClick="Element.hide('active_table');Element.show('alternate_table');return false"><a href="#">active policies</a></li>
+                    <li class="active"  onClick="Element.hide('alternate_table');Element.show('active_table');return false"><a href="#">inactive policies</a></li>
+                    </ul>
+                    <table class="alternate sortable no-arrow" border="0" cellspacing="0" cellpadding="0" id="alternate_table">
+                    <thead>
+                        <tr>
+                          <th class="search"></th>
+                          <th class="type sortable-text">sport</th>
+                          <th class="team sortable-text">team</th>
+                              <th class="event sortable-text">event</th>
+                              <th class="policies sortable-numeric">policies</th>
+                            <th class="status sortable-text">status</th>
+                            <th class="sell sorttable_nosort">&nbsp;</th>
+                        </tr>                        
+                    </thead>
+                    <tbody id="policy_table">
+                      <%= render :partial => 'policy_table_body', :locals => { :policies => @gifts_received, :transaction => 'claim', :status => "For Claim" } %>
+                      <%= render :partial => 'policy_table_body', :locals => { :policies => @inventory, :transaction => 'sell', :status => "Active" } %>
+                      <%= render :partial => 'policy_table_body', :locals => { :policies => @listed_policies, :transaction => 'update', :status => "For Sale" } %>
+                      <%= render :partial => 'policy_table_body', :locals => { :policies => @gifts_given, :transaction => 'claim_update', :status => 'Pending - Gift' } %>
+                    </tbody>
+                </table>            
+                <div class="clear"><!--Start section clear -->                
+                </div><!--End section clear-->
+                <table class="active sortable no-arrow" border="0" cellspacing="0" cellpadding="0" id="active_table" style="display:none">
+                <thead>
+                    <tr>
+                      <th class="search"></th>
+                      <th class="type sortable-text">sport</th>
+                      <th class="team sortable-text">team</th>
+                      <th class="event sortable-text">event</a></th>
+                      <th class="policies sortable-numeric">policies</th>
+                      <th class="status">status</th>
+                    </tr>                        
+                </thead>
+                <tbody id="policy_table">
+                  <%= render :partial => 'policy_table_body', :locals => { :policies => @sold_policies, :transaction => false, :status => 'Sold' } %>
+                  <%= render :partial => 'policy_table_body', :locals => { :policies => @inactive_policies, :transaction => false, :status => 'InActive' } %>
+                  <%= render :partial => 'policy_table_body', :locals => { :policies => @gifts_claimed, :transaction => false, :status => 'Gift Claimed' } %>
+                </tbody>
+            </table>            
+            <div class="clear"><!--Start section clear -->                
+            </div><!--End section clear-->
+                
+                <div class="teamfoot"><!--Start section teamfoot -->
+                    <p class="shop"><a href="/site/help">help</a></p>
+                </div><!--End section teamfoot-->
+            </div><!--End section teamhead -->            
+        </div><!--End section teambody-->
+		<div class="clear"><!-- BEGIN class clear-->			
+		</div><!-- END class clear-->
+	</div><!-- END class body-->

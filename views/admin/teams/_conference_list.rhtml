@@ -1,0 +1,7 @@
+<label>Select Conference</label><br />
+<select id="conference_id" name="conference_id">
+  <option value="">Select One</option>
+  <% conferences.each do |c| %>
+  <option value="<%=c.id %>"><%= c.name%></option>
+  <% end %>
+ </select><br />

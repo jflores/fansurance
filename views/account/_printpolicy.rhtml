@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+	"http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+	<title>Fansurance | home</title>
+	  <%= stylesheet_link_tag 'style', :media => 'all' %>
+	  <%= stylesheet_link_tag 'print', :media => 'all' %>
+</head>
+<body>
+<div class="container"><!-- BEGIN class container-->
+	<div class="header"><!-- BEGIN class header-->
+        <img src="/images/logo.gif" alt="print header"/>        
+    </div>		
+	<div class="body policydetails policypage policypageprint"><!-- BEGIN class body-->
+                <p class="breadcrumb"><span class="breadcrumb"><a href="#">policy details</a></span></p> 
+                <div class="clear"><!--Start section clear -->                    
+                </div><!--End section clear-->
+                <div class="policydetailsbrowse"><!--Start section policydetailsbrowse -->
+                  <img src="/images/policydetailsbrowse.gif" class="printbkg"/>
+                    <dl>
+                        <dt>Team:</dt>
+                        <dd><%= @policy.event.team.name %></dd>
+                        <dt>Event:</dt>
+                        <dd><%= @policy.event.name %></dd>
+                        <dt>Price:</dt>
+                        <dd><%= number_to_currency(@policy.policy_price * @policy.quantity) %></dd>
+                        <dt>Number of Policies:</dt>
+                        <dd><%= @policy.quantity %></dd>
+                        <dt>Purchased on:</dt>
+                        <% purchase_date = @policy.order_item.order.created_at %>
+                        <dd><%= "#{purchase_date.month}/#{purchase_date.day}/#{purchase_date.year}" %></dd>
+                        <dt class="address">Delivery Information:</dt>
+                        <dd class="address">
+                            <span class="name"><%= "#{current_user.firstname} #{current_user.lastname}"-%></span>
+                            <span class="address-1"><%=  current_user.shipping_address1 %></span>
+                            <span class="address-2"><%=  current_user.shipping_address2 %></span>
+                            <span class="state"><%=  "#{current_user.shipping_city}, #{current_user.shipping_state},  #{current_user.shipping_zip}" %></span>
+                        </dd>
+                        <dt>Policy Terms:</dt>
+                        <dd class="terms"><%=@policyterms%></dd>
+                    </dl>
+                    <div class="clear"><!--Start section clear -->                
+                    </div><!--End section clear-->                                        
+                </div><!--End section policydetailsbrowse-->         
+		<div class="clear"><!-- BEGIN class clear-->			
+		</div><!-- END class clear-->
+	</div><!-- END class body-->
+	<div class="footer"><!-- BEGIN class footer-->
+		<p>Fansurance.com is a registered trademark of Match Point Equity, LLC.</p>
+		<ul>
+			<li class="first"><a href="#">home</a></li>
+			<li><a href="#">about us</a></li>			
+			<li><a href="#">contact us</a></li>
+			<li><a href="#">the guarantee</a></li>			
+			<li><a href="#">faq</a></li>
+			<li><a href="#">legal stuff</a></li>			
+			<li class="last"><a href="#">news</a></li>
+		</ul>
+	</div><!-- END class footer-->
+</div><!-- END class container-->
+</body>
+</html>

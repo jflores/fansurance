@@ -1,0 +1,21 @@
+<label for="firstname">First Name</label>
+<%= text_field :user, :firstname %>
+
+<label for="firstname">Last Name</label>
+<%= text_field :user, :lastname %>
+
+<label for="email">Email</label>
+<%= text_field :user, :email %>
+
+<label for="email">Confirm Email</label>
+<%= text_field :user, :email_confirmation %>
+
+<label for="password">Password</label>
+<%= password_field :user, :password %>
+
+<label for="password_confirmation">Confirm Password</label>
+<%= password_field :user, :password_confirmation %><br/>
+<div class="checkbox" id="checkbox2">
+<!--Start section checkbox -->
+<%= check_box :user, :email_agreement %><label for="ac_ad">Yes, Fansurance can email me about new product and service offerings<br/></label>
+</div>

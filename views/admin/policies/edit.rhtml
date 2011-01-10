@@ -1,0 +1,9 @@
+<h1>Editing policy</h1>
+
+<%= start_form_tag :action => 'update', :id => @policy %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Confirm Changes' %>
+<%= end_form_tag %>
+
+<%= link_to 'Show', :action => 'show', :id => @policy %> |
+<%= link_to 'Back', :action => 'list' %>

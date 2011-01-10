@@ -1,0 +1,18 @@
+<% if exchange %>
+  <%= link_to "begin", {:controller => 'exchange', :action => :team, :id => team.id}, :class => "submit" if team %>
+<% else %>
+  <% if any_team %>
+  <%= link_to "begin", {:controller => 'site', :action => :events, :sport_id => sport.id }, :class => "submit" %>
+  <% elsif team %>
+  <%= link_to "begin", {:controller => 'site', :action => :events, :team_id => team.id}, :class => "submit" %>
+  <% elsif sport %>
+    <% if sport.conferences.size > 0 %>
+    <%= link_to "begin", {:controller => 'site', :action => :events, :sport_id => sport.id, :conferences => 1, :conference_id => conference.id }, :class => "submit" %>
+    <% else %>
+    <%= link_to "begin", {:controller => 'site', :action => :events, :sport_id => sport.id }, :class => "submit" %>
+    <% end %>
+  <% else %>
+  <%= link_to "begin", '#', :class => "submit" %>
+  <% end %>
+<% end %>
+

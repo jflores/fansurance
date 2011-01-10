@@ -1,0 +1,22 @@
+<h4>Primary Shipping Information</h4>
+
+<label for="user_shipping_firstname">First Name</label>
+<%= text_field 'user', 'shipping_firstname' %>
+
+<label for="user_shipping_lastname">Last Name</label>
+<%= text_field 'user', 'shipping_lastname' %>
+
+<label for="user_shipping_address1">Address 1</label>
+<%= text_field 'user', 'shipping_address1' %>
+
+<label for="user_shipping_addressr2">Address 2</label>
+<%= text_field 'user', 'shipping_address2' %>
+
+<label for="user_shipping_city">City</label>
+<%= text_field 'user', 'shipping_city' %>
+
+<label for="user_shipping_state">State</label>
+<%= text_field 'user', 'shipping_state', :class => "state", :size => 2, :maxlength => 2 %>
+
+<label for="user_shipping_zip">Zip</label>
+<%= text_field 'user', 'shipping_zip' %><br />

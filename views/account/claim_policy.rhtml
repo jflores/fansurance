@@ -1,0 +1,54 @@
+<%= render :partial => 'site/round_top' %>
+<h2 class="title">Claim Gift</h2>
+<% if @errors %>
+<p class="error"><% for error in @errors %> <%= error %> <br /> <% end %></p> 
+<% end %>
+<form action="/account/claim_policy/<%= params[:id] %>" name="theform" method="post">
+
+  <% if @policy_gift.owner_id == session[:user] %>
+    Do you want to cancel the gift and claim the policy ?
+  <br/>
+  	<input type="button" value="Cancel the gift and claim the policy for myself" style="display:inline;width:300px" onClick="if (confirm('Really cancel the gift and claim the policy for yourself?')) { document.theform.submit(); }"/>
+  <% else %>
+  <p>Do you want to claim   <%= pluralize(@policy_gift.quantity, "policy", "policies") %> gifted by <%= @policy_gift.user.name %> for <%= @policy_gift.event.name %> of <%= @policy_gift.event.team.name %> ?</p>
+  <br/>
+  <%= submit_tag 'Claim the gift' , :style => "display:inline" %>
+  <% end %>
+  <% if @policy_gift.owner_id == session[:user] %>
+    <input type="button" name="edit" value="Edit gift options/resend gift message" style="display:inline;width:300px" onClick="Element.toggle('gift_details')"/>
+  <% end %>
+</form>
+<% if @policy_gift.owner_id == session[:user] %>
+<div class="giftoptions">
+<div class="giftdetail" id="gift_details" <% if !@edit %>style="display:none"><% end %><!--Start section giftdetail -->
+  <div class="left"><!--Start section left -->
+    <form action="/account/modify_gift/<%= @policy_gift.id %>" method="post" id="form_gift" name="form_gift">
+      <div class="form_item"><!--Start section form_item -->
+          <label for="name" style="clear:none;font-weight:normal">Recipient  Name</label>
+          <input type="text" name="name"  id="name" value="<%= !params[:name] ||params[:name] == "" ? @policy_gift.receiver_name : params[:name] %>" style="clear:none" >
+      </div><!--End section form_item-->
+      <div class="form_item"><!--Start section form_item -->
+          <label for="email_1" style="clear:none;font-weight:normal">Recipient Email:</label>
+          <input type="text" name="email_1"  id="email_1" value="<%= !params[:email_1] ||params[:email_1] == "" ? @policy_gift.receiver_email :  params[:email_1] %>" style="clear:none" >
+      </div><!--End section form_item-->
+      <div class="form_item"><!--Start section form_item -->
+        <label for="email_2" style="clear:none;font-weight:normal">Confirm Recipient Email:</label> <input type="text" name="email_2"  id="email_2"  value="<%= !params[:email_2] || params[:email_2] == "" ? @policy_gift.receiver_email :  params[:email_2] %>" style="clear:none" >
+          <div class="clear"><!--Start section clear -->                                                        
+          </div><!--End section clear-->
+      </div><!--End section form_item-->                                                
+  </div><!--End section left-->
+  <div class="right_area"><!--Start section right_area -->
+      <label for="note" style="clear:none;font-weight:normal">Send a note:</label>
+      <textarea name="note" rows="5" cols="39" id="note" style="clear:none" ><%= !params[:note] ||params[:note] == "" ? @policy_gift.note : params[:note] %></textarea>
+  </div><!--End section right_area-->
+  <div class="clear"><!--Start section clear -->                                                
+  </div><!--End section clear-->
+  <a class="modify" href="#" onClick="document.form_gift.submit()">[ Confirm gift options and re-send gift message ]</a>
+  <a class="modify" href="#" onClick="Element.hide('gift_details')">[ Don't make any changes ]</a>
+  </form>
+  <div class="clear"><!--Start section clear -->                                                
+  </div><!--End section clear-->
+</div><!--End section giftdetail-->
+</div>
+<% end %>
+<%= render :partial => 'site/round_bottom' %>

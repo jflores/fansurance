@@ -1,0 +1,9 @@
+<%= error_messages_for 'conference' %>
+
+<!--[form:conference]-->
+<p><label for="conference_sport">Sport</label><br />
+<%= select("conference", "sport_id", Sport.find(:all).collect {|s| [ s.name, s.id ] }) %><br />
+<p><label for="conference_name">Name</label><br/>
+<%= text_field 'conference', 'name'  %></p>
+<!--[eoform:conference]-->
+

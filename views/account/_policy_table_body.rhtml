@@ -1,0 +1,35 @@
+<% for policy in policies %>
+  <tr id="policy_<%= policy.id -%>">
+      <td><%= link_to 'search', {:action => 'policydetails', :id => policy.id},:class=>"search" %></td>
+      <td>
+          <%= policy.event.team.sport.name %>
+      </td>
+      <td>
+          <%= policy.event.team.name %>
+      </td>
+      <td>
+          <%= policy.event.name %>
+      </td>
+      <td>
+          <%= policy.quantity %>    
+      </td>
+      <% if transaction %>
+        <td>
+            <%= status %>
+        </td>
+        <td>
+          <% if transaction == 'sell' %>        
+            <%= link_to "Sell" , :controller => 'exchange', :action => 'team' , :id => policy.event.team.id, :policy_id => policy.id, :transaction => 'sell'  %>
+          <% elsif transaction == 'update' %>
+            <%= link_to "Update" , :controller => 'exchange', :action => 'team' , :id => policy.event.team.id, :policy_id => policy.id, :transaction => 'update'  %>
+          <% elsif transaction == 'claim' %>
+            <%= link_to "Claim" , :controller => 'account', :action => 'claim_policy' , :id => policy.id,  :transaction => 'claim'  %>
+          <% elsif transaction == 'claim_update' %>
+            <%= link_to "Claim/Update" , :controller => 'account', :action => 'claim_policy' , :id => policy.id,  :transaction => 'claim'  %>
+          <% end %>
+        </td>
+     <% else %>
+      <td><%= status %></td>
+     <% end %>
+  </tr>
+<% end %>

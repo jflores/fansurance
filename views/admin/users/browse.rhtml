@@ -1,0 +1,18 @@
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Last Logged in On</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @users.each do |u| %>
+  <tr>
+    <td><a href="/admin/users/details/<%= u.id %>"><%= u.name %></a></td>
+    <td><%= u.last_logged_in_on %></td>
+  </tr>
+  <% end %>
+  </tbody>
+</table>
+
+

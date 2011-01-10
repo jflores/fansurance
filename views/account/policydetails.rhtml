@@ -1,0 +1,39 @@
+<div class="body policydetails policypage"><!-- BEGIN class body-->
+        <div class="teambody"><!--Start section teambody -->
+            <div class="teamhead"><!--Start section teamhead -->
+                <p class="breadcrumb"><span class="breadcrumb"><a href="#">policy details</a></span>(<a href="/account/profile">back</a>)</p> 
+                <p class="shop"><a class="print" href="/account/printpolicy/<%= @policy.id %>">[Print This Policy]</a></p>               
+                <div class="clear"><!--Start section clear -->                    
+                </div><!--End section clear-->
+                <div class="policydetailsbrowse"><!--Start section policydetailsbrowse -->
+                    <dl>
+                        <dt>Team:</dt>
+                        <dd><%= @policy.event.team.name %></dd>
+                        <dt>Event:</dt>
+                        <dd><%= @policy.event.name %></dd>
+                        <dt>Number of Policies:</dt>
+                        <dd><%= @policy.quantity %></dd>
+                        <dt>Purchased on:</dt>
+                        <% purchase_date = @policy.order_item.order.created_at %>
+                        <dd><%= "#{purchase_date.month}/#{purchase_date.day}/#{purchase_date.year}" %></dd>
+                        <dt>Price Per Policy:</dt>
+                        <dd><%= number_to_currency @policy.policy_price %></dd>
+                        <dt class="address">Delivery Information:</dt>
+                        <dd class="address">
+                        <span class="name"><%= @policy.order.shipping_name %> </span>
+                            <span class="address-1"><%=  @policy.order.s_address1 %></span>
+                            <span class="address-2"><%=  @policy.order.s_address2 %></span>
+                            <span class="state"><%=  "#{@policy.order.s_city}, #{@policy.order.s_state},  #{@policy.order.s_zip}" %></span>
+                            <a href="/account/edit">[modify]</a>
+                        </dd>
+                        <dt>Policy Terms:</dt>
+                        <dd>Some terms</dd>
+                    </dl>
+                    <div class="clear"><!--Start section clear -->                
+                    </div><!--End section clear-->                                        
+                </div><!--End section policydetailsbrowse-->                
+            </div><!--End section teamhead -->            
+        </div><!--End section teambody-->
+		<div class="clear"><!-- BEGIN class clear-->			
+		</div><!-- END class clear-->
+	</div><!-- END class body-->
